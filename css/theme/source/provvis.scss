@@ -1,0 +1,141 @@
+/**
+ * White theme for reveal.js. This is the opposite of the 'black' theme.
+ *
+ * By Hakim El Hattab, http://hakim.se
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #fff;
+
+$mainColor: #222;
+$headingColor: #136382;
+
+$mainFontSize: 26px;
+$mainFont: 'Lato', Helvetica, sans-serif;
+$headingFont: 'Lato', Helvetica, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: normal;
+$headingFontWeight: 600;
+$linkColor: #777;
+$linkColorHover: lighten( $linkColor, 15% );
+$selectionBackgroundColor: lighten( $linkColor, 25% );
+
+$heading1Size: 2.5em;
+$heading2Size: 1.6em;
+$heading3Size: 1.3em;
+$heading4Size: 1.0em;
+
+section.has-dark-background {
+	&, h1, h2, h3, h4, h5, h6 {
+		color: #fff;
+	}
+}
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+.reveal section {
+	text-align: left;
+}
+
+.reveal section img {
+	margin: 15px 0px;
+	border: none;
+	box-shadow: none;
+}
+
+.reveal .subtitle, .reveal .brand {
+	opacity: 0.7;
+	color: $linkColor;
+}
+
+.reveal .header {
+	z-index: 99;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+	left: 15px;
+  height: auto;
+}
+
+.reveal .header table {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.reveal img.header-img {
+	max-height: 50px;
+ 	opacity: 0.5;
+}
+
+.reveal .header td {
+    vertical-align: top;
+		padding: 0;
+		margin: 10px;
+}
+
+.reveal .header td:not(:first-child){
+    width: 230px;
+		align: right;
+}
+
+.reveal .header td:last-child{
+    max-width: 150px;
+		width:150px;
+}
+
+.reveal .footer {
+	z-index: 99;
+  position: absolute;
+  bottom: 15px;
+	left: 15px;
+  height: auto;
+	padding-left: 0px;
+	margin-left: 0px;
+}
+
+.reveal .footer td:first-child {
+	padding-left: 0px;
+	margin-left: 0px;
+}
+
+.reveal table.acks td img {
+	max-height: 150px;
+}
+
+.reveal table.acks td {
+	width: 300px;
+	text-align: center;
+}
+
+.reveal {
+	background: url("../../assets/jku-k.png") no-repeat center;
+	background-color: rgba(255, 255, 255, .96);
+	background-blend-mode: color;
+	background-size: 100%;
+}
+
+.reveal ul {
+    // list-style-type: none;
+}
+
+.reveal ul li {
+		padding-top: 5px;
+    padding-bottom: 5px;
+}

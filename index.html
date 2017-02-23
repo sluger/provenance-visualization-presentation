@@ -1,0 +1,1013 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Master's Defense Presentation (c) Stefan Luger</title>
+
+	<meta name="description" content="A repository hosting my Master's defense presentation. The presentation is built with the reveal.js presentation framework.">
+	<meta name="author" content="Stefan Luger">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/provvis.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- FontAwesome -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<div class="header">
+			<table>
+				<tr>
+					<td>
+						<a href="http://www.refinery-platform.org/"><img class="header-img" src="assets/refinery-platform-logo.png"></img>
+						</a>
+					</td>
+					<td>
+						<a href="https://hms.harvard.edu/"><img class="header-img" src="assets/hms-logo.png"></img>
+						</a>
+					</td>
+					<td align="right">
+						<a href="http://www.jku.at/"><img class="header-img" style="max-height:80px;" src="assets/jku-logo.png"></img>
+						</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="footer">
+			<table>
+				<tr>
+					<td align="left" class="brand subtitle">
+						<h4><a href="http://sluger.github.io"><i class="fa fa-github"></i><span> sluger</span></a></div>
+		</td>
+		</tr>
+		</table>
+	</div>
+
+	<!-- Any section element inside of this container is displayed as a slide -->
+	<div class="slides">
+		<section>
+			<center>
+				<h2>Interactive Visualization of Provenance Graphs for Reproducible Biomedical Research </h2>
+				<br>
+				<h4 class="subtitle">Master's Thesis by Stefan Luger</h4>
+				<h4 class="subtitle">March 2016</h4>
+			</center>
+
+		</section>
+
+		<!--section>
+					<h2>Contents</h2>
+					<ul>
+						<li>Introduction</li>
+						<li>User Tasks</li>
+						<li>Related Work</li>
+						<li>Methods</li>
+						<li>Results</li>
+						<li>Conclusion</li>
+					</ul>
+					
+				</section-->
+
+		<section>
+
+			<section>
+				<h2>The Reproducibility Crisis</h2>
+				<p>Recently, researchers often fail to reproduce published study results for
+					<emph>drug development</emph> and
+					<emph>cancer treatments</emph>
+				</p>
+				<table>
+					<tr>
+						<td width=65%>
+							<center>
+								<img width="100%" src="assets/cancer-test.png">
+								<p align="right">[Kaiser 2015]</p>
+							</center>
+						</td>
+						<td style="vertical-align:top;">
+							<p class="fragment" data-fragment-index="1">The Reasons</p>
+							<ul>
+								<li class="fragment" data-fragment-index="1">Advances in sequencing and hardware</li>
+								<li class="fragment" data-fragment-index="1">
+									<emph>Large, heterogeneous, and complex studies</emph>
+								</li>
+								<li class="fragment" data-fragment-index="1">Use of external scripts, programs, manual results</li>
+								<li class="fragment" data-fragment-index="1">No (real) standards</li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+
+			</section>
+
+			<section>
+				<h2>Workflows</h2>
+				<p>of sequential and linked
+					<emph>files</emph> (results) and
+					<emph>tools</emph> (data transformations)</p><br>
+				<h2 class="fragment" data-fragment-index="1">Provenance</h2>
+				<blockquote class="fragment" data-fragment-index="1" cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+					&ldquo;The two important features of the provenance of a data product are the
+					<emph>ancestral data product(s)</emph> from which this data product evolved, and the process of
+					<emph>transformation</emph> of these ancestral data product(s), potentially through workflows, that helped
+					<emph>derive this data product.</emph>&rdquo;
+				</blockquote>
+				<p class="fragment" data-fragment-index="1" align="right">[Simmhan et al. 2005]</p><br>
+				<h2 class="fragment" data-fragment-index="2">Visualization</h2>
+				<p class="fragment" data-fragment-index="2">Visual analysis of
+					<emph>workflow data provenance</emph>
+				</p>
+				</ul>
+
+			</section>
+
+
+
+			<section>
+				<h2>The Refinery Platform</h2>
+				<p>a web-based data
+					<emph>visualization and analysis platform</emph> for biomedical workflow studies</p>
+				<table>
+					<tr>
+						<td colspan="2">
+							<div>
+								<span style="float: left; font-size:20px">Refinery Workflow Visualization</span>
+								<span style="float: right"><a style="font-size:20px" href="http://refinery-platform.org">refinery-platform.org</a></span>
+								<div style="clear:both;"></div>
+							</div>
+							<center>
+								<img width="90%" src="assets/refinery-workflow.PNG">
+							</center>
+						</td>
+					</tr>
+					<tr>
+						<td width="50%" class="fragment" data-fragment-index="1" style="font-size:20px">
+							<center>
+								Galaxy Workflow Execution
+								<img height="200" src="assets/galaxy.png">
+							</center>
+						</td>
+						<td width=50% class="fragment" data-fragment-index="2" style="font-size:20px">
+							<center>
+								Provenance Graph
+								<img height="200" style="background-color:#fff;" src="assets/refinery-experiment-graph.png">
+							</center>
+						</td>
+					</tr>
+				</table>
+
+			</section>
+
+			<section>
+				<h2>Terms</h2>
+				<center>
+					<img height="400" src="assets/background.png">
+				</center>
+
+				<!--li><emph>Provenance Graph</emph></li-->
+				<p>Workflow
+					<emph>template</emph> -> workflow
+					<emph>execution</emph> (Galaxy) -> workflow
+					<emph>instance</emph> =
+					<emph>analysis</emph>
+				</p>
+				<p>Dataset + multiple analyses =>
+					<emph>Provenance graph</emph>
+				</p>
+				<!--li class="fragment" data-fragment-index="2">Hierarchy Levels</li-->
+				<!--li class="fragment" data-fragment-index="2"><emph>Workflow:</emph> files and tools</li-->
+				<!--li class="fragment" data-fragment-index="2"><emph>Subanalysis:</emph> restricted to one workflow template</li-->
+				<!--li class="fragment" data-fragment-index="2"><emph>Analysis:</emph> may contain multiple subanalyses of the same workflow template</li-->
+
+
+			</section>
+
+			<section>
+				<h2>Goal</h2>
+				<p>Interactive provenance
+					<emph>visualization</emph> to review and
+					<emph>ensure reproducibility</emph>
+				</p>
+				<ol>
+					<li>Navigate and explore provenance graphs over time</li>
+					<li>Refinery Platform integration</li>
+				</ol>
+
+			</section>
+		</section>
+
+		<section data-background-video="assets/infovis15teasernoaudio.webm">
+
+		</section>
+
+		<section>
+			<h2>User Tasks</h2>
+			<p>from the perspective of an Analyst</p>
+			<ul>
+				<li class="fragment" data-fragment-index="1"><span class="fragment highlighted" data-fragment-index="7"><b>High-Level Overview</b></span><br>
+					<div style="font-size:20px">Show workflow runs, type and time</div>
+				</li>
+				<div class="fragment fade-out" data-fragment-index="7">
+					<li class="fragment" data-fragment-index="1"><b>Attribute Encoding</b><br>
+						<div style="font-size:20px">Visual encoding of attributes (e.g., cell type, time, hierarchy level)</div>
+					</li>
+				</div>
+				<div class="fragment fade-out" data-fragment-index="7">
+					<li class="fragment" data-fragment-index="1"><b>Filter</b><br>
+						<div style="font-size:20px">Trim irrelevant data</div>
+					</li>
+				</div>
+				<li class="fragment" data-fragment-index="1"><span class="fragment highlighted" data-fragment-index="7"><b>Drill-Down on Demand</b></span><br>
+					<div style="font-size:20px">Navigate among hierarchy levels</div>
+				</li>
+				<div class="fragment fade-out" data-fragment-index="7">
+					<li class="fragment" data-fragment-index="1"><b>Investigate Changes</b><br>
+						<div style="font-size:20px">Communicate changes over time</div>
+					</li>
+				</div>
+				<div class="fragment fade-out" data-fragment-index="7">
+					<li class="fragment" data-fragment-index="1"><b>Investigate Causality</b></span><br>
+						<div style="font-size:20px">Files and transformations that led to a particular result</div>
+					</li>
+				</div>
+			</ul>
+
+		</section>
+
+		<!-- RELATED WORK -->
+		<section>
+			<section>
+				<h2>Related Work</h2>
+				<ul>
+					<li>Simplistic encoding</li>
+					<li>Mostly static</li>
+					<li>Heavy use of text labels</li>
+					<li class="fragment" data-fragment-index="1">Limited interaction</li>
+					<li class="fragment" data-fragment-index="2">Lack of time encoding</li>
+					<li class="fragment" data-fragment-index="3">Suboptimal graph<br>layout aesthetics</li>
+					<li class="fragment" data-fragment-index="3">Do not scale</li>
+				</ul>
+
+				<!--div class="fragment" data-fragment-index="1" style="position:absolute; left: 300px; top:70px;"><img width="450px" src="assets/rw-1.png"></div-->
+				<!--div class="fragment" data-fragment-index="2" style="position:absolute; left: 320px; top:80px;"><img max-width="450px" src="assets/rw-2.png"></div-->
+				<div style="position:absolute; left: 340px; top:90px;"><img max-width="450px" src="assets/rw-3.png"></div>
+				<div class="fragment" data-fragment-index="1" style="position:absolute; left: 360px; top:100px;"><img max-width="400px" src="assets/rw-4.png"></div>
+				<div class="fragment" data-fragment-index="2" style="position:absolute; left: 380px; top:110px;"><img max-width="450px" src="assets/rw-5.png"></div>
+				<div class="fragment" data-fragment-index="3" style="position:absolute; left: 420px; top:130px;"><img width="450px" src="assets/rw-7.PNG"></div>
+				<!--div class="fragment" data-fragment-index="7" style="position:absolute; left: 400px; top:120px;"><img max-width="450px" src="assets/rw-6.png"></div-->
+
+				<div style="position:absolute; left: 0px; top:670px; font-size:20px">
+					<!--span class="fragment" data-fragment-index="1">[Paula 2013]</span-->
+					<!--span class="fragment" data-fragment-index="2">, [Hunter 2007]</span-->
+					<span>[Omberg 2013]</span>
+					<span class="fragment" data-fragment-index="1">, [Anand 2010]</span>
+					<span class="fragment" data-fragment-index="2">, [Davidson 2007]</span>
+					<span class="fragment" data-fragment-index="3">, [Seltzer 2011]</span>
+					<!--span class="fragment" data-fragment-index="7">, [Chen 2012]</span-->
+				</div>
+
+			</section>
+		</section>
+
+		<section>
+			<section>
+				<h2>Methods</h2>
+				<table class="tbl-methods">
+					<tr>
+						<td>
+							<div class="fragment fade-out" data-fragment-index="2">
+								<div>Node-Link<img src="assets/m-nl.png"></div>
+							</div>
+						</td>
+						<td>
+							<div class="fragment fade-out" data-fragment-index="2">
+								<div>Dynamic Graph Layout<img src="assets/m-dynamic.png"><span style="font-size:15px;">*</span></div>
+							</div>
+						</td>
+						<td>
+							<div class="fragment fade-out" data-fragment-index="2">
+								<div>Filtering<img src="assets/m-filter.png"></div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div>
+								<div class="fragment highlighted" data-fragment-index="2">Aggregation</div><img src="assets/m-agg.png"></div>
+						</td>
+						<td>
+							<div>
+								<div class="fragment highlighted" data-fragment-index="2">Motif Compression</div><img src="assets/m-compression.png"></div>
+						</td>
+						<td>
+							<div>
+								<div class="fragment highlighted" data-fragment-index="2">Degree-of-Interest</div><img src="assets/m-doi.png"></div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="fragment fade-out" data-fragment-index="2">
+								<div>Analysis Timeline<img src="assets/m-timeline.png"></div>
+							</div>
+						</td>
+						<td>
+							<div class="fragment fade-out" data-fragment-index="2">
+								<div>Glyph Design<img src="assets/m-glyphs.png"></div>
+							</div>
+						</td>
+						<td>
+							<div class="fragment fade-out" data-fragment-index="2">
+								<div>Path Highlighting<img src="assets/m-highlight.png">*</div>
+							</div>
+						</td>
+					</tr>
+					<!--tr>
+									<td><div class="fragment fade-out" data-fragment-index="2"><div class="fragment" data-fragment-index="1">Pan and Zoom,<br>Drag & Drop,<br>Select, ...</div></div></td>
+								</tr-->
+				</table>
+				<p>
+					<div class="fragment fade-out" data-fragment-index="2"><span style="font-size: 20px; align: bottom; float: left;">*[Beck 2014]</span></div>
+				</p>
+
+			</section>
+
+			<section>
+				<h2>Hierarchical Aggregation</h2>
+				<table style="float:left">
+					<tr>
+						<td>
+							<div style="text-align:center;">
+								<img height="150px" src="assets/ha-wf.png">
+							</div>
+						</td>
+						<td style="vertical-align: middle;">
+							<span>Workflow Level</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div style="text-align:center;">
+								<img height="200px" src="assets/ha-sa.png">
+							</div>
+						</td>
+						<td style="vertical-align: middle;">
+							<span>Subanalysis Level</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div style="text-align:center;">
+								<img height="95px" src="assets/ha-a.png">
+							</div>
+						</td>
+						<td style="vertical-align: middle;">
+							<span>Analysis Level</span>
+						</td>
+					</tr>
+				</table>
+				<div style="position:absolute; left: 0px; top:670px; font-size:20px">[Elmqvist 2010]</div>
+
+			</section>
+
+			<section>
+				<h2>Motif-based Compression</h2>
+
+				<table style="float:left">
+					<tr>
+						<td>
+							<div style="text-align:center;">
+								<img height="300px" src="assets/motif-sa.png">
+							</div>
+						</td>
+						<td style="vertical-align: middle;">
+							<span>Subanalysis Level</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div style="text-align:center;">
+								<img height="145px" src="assets/motif-a.png">
+							</div>
+						</td>
+						<td style="vertical-align: middle;">
+							<span>Analysis Level</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div style="text-align:center;" class="fragment" data-fragment-index="2">
+								<img height="65px" src="assets/motif-layering.png">
+							</div>
+						</td>
+						<td style="vertical-align: middle;">
+							<span class="fragment" data-fragment-index="2">Layer Level</span>
+						</td>
+					</tr>
+				</table>
+
+				<div style="position:absolute; top:100px; left: 232px;" class="fragment" data-fragment-index="1">
+					<svg width="100" height="500">
+						<rect x="10" y="10" width="53" height="260" style="fill-opacity:0;stroke-width:3;stroke:rgb(128,0,0)" />
+					</svg>
+				</div>
+
+				<div style="position:absolute; top:100px; left: 232px;" class="fragment" data-fragment-index="1">
+					<svg width="100" height="500">
+						<line x1="36" y1="270" x2="36" y2="353" style="stroke:rgb(128,0,0);stroke-width:3" />
+					</svg>
+				</div>
+
+				<div style="position:absolute; top:443px; left: 232px;" class="fragment" data-fragment-index="1">
+					<svg width="100" height="300">
+						<rect x="10" y="10" width="53" height="110" style="fill-opacity:0;stroke-width:3;stroke:rgb(128,0,0)" />
+					</svg>
+				</div>
+
+				<div style="position:absolute; top:443px; left: 232px;" class="fragment" data-fragment-index="2">
+					<svg width="100" height="500">
+						<line x1="36" y1="121" x2="36" y2="198" style="stroke:rgb(128,0,0);stroke-width:3" />
+					</svg>
+				</div>
+
+				<div style="position:absolute; top:633px; left: 232px;" class="fragment" data-fragment-index="2">
+					<svg width="100" height="300">
+						<rect x="10" y="10" width="53" height="34" style="fill-opacity:0;stroke-width:3;stroke:rgb(128,0,0)" />
+					</svg>
+				</div>
+
+				<div style="position:absolute; left: 560px; right: 0px; top:150px;">
+					<h4 class="fragment" data-fragment-index="1">Motifs</h4>
+					<p class="fragment" data-fragment-index="1">Discover analyses with the
+						<emph>same workflow template</emph> within a column.</p>
+				</div>
+
+				<div style="position:absolute; left: 560px; right: 0px; top:345px;">
+					<h4 class="fragment" data-fragment-index="2">Layers</h4>
+					<p class="fragment" data-fragment-index="2">Layer analyses with the
+						<emph>same motifs</emph> into an abstract layer node.</p>
+				</div>
+
+				<div style="position:absolute; left: 560px; right: 0px; top:510px;">
+					<h4 class="fragment" data-fragment-index="3">Metrics</h4>
+					<p class="fragment" data-fragment-index="3">Compute deviating amount of incoming or outgoing links and subanalyses.</p>
+				</div>
+
+				<div style="position:absolute; right: 100px; top:670px; font-size:20px">[Milo 2002][Maguire 2013]</div>
+
+
+			</section>
+
+
+			<section>
+				<h2>Combined Aggregation Strategy</h2>
+				<!-- class="fragment fade-out" data-fragment-index="1" -->
+				<div style="position:absolute; top:70px;"><img width="100%" src="assets/ha-and-motif-wf.png"></div>
+				<div style="position:absolute; left: 131px; top:78px;" class="fragment" data-fragment-index="1"><img width="650px" src="assets/combined-aggregation.png"></div>
+				<!--div style="position:absolute; left: 0px; top:650px;" class="fragment" data-fragment-index="1"><p>Hierarchy levels: (a) Workflow, (b) Subanalysis, (c) Analysis, (d) Layer.</p></div-->
+				<div style="position:absolute; left: 0px; top:265px;" class="fragment" data-fragment-index="1">
+					<p>Subanalyses</p>
+				</div>
+				<div style="position:absolute; left: 0px; top:455px;" class="fragment" data-fragment-index="1">
+					<p>Analyses</p>
+				</div>
+				<div style="position:absolute; left: 0px; top:625px;" class="fragment" data-fragment-index="1">
+					<p>Layers</p>
+				</div>
+
+			</section>
+
+
+
+
+			<section>
+				<h2>Degree-of-Interest (DOI)</h2>
+				<p>Every
+					<emph>node n</emph> carries five DOI components of individual
+					<emph>value v</emph> and
+					<emph>weight w</emph>
+				</p>
+				<table style="float: left;">
+					<tr>
+						<td width="30%" style="vertical-align: middle;">General interest:</td>
+						<td width="40%" style="vertical-align: middle;">
+							<emph>time, change</emph>
+						</td>
+						<td width="25%" style="vertical-align: middle;">(v,w)
+							<- [0..1]</td>
+					</tr>
+					<tr>
+						<td width="30%" style="vertical-align: middle;">User actions:</td>
+						<td width="40%" style="vertical-align: middle;">
+							<emph>filter, highlight, selection</emph>
+						</td>
+						<td width="25%" style="vertical-align: middle;">v
+							<- [0,1], w <- [0..1]</td>
+					</tr>
+				</table>
+				<p></p>
+				<center>
+					<img width="400px" src="assets/doi-function.PNG">
+					<center>
+						<br>
+						<table>
+							<tr>
+								<td class="fragment" data-fragment-index="4">
+									<p>Adjust weights:</p>
+									<img width="500px" src="assets/doi-stacked-bar.png">
+								</td>
+								<td class="fragment" data-fragment-index="5">
+									<p>DOI(n) affects node visibility:</p>
+									<img width="700px" src="assets/doi-expansion-extraction.PNG">
+								</td>
+							</tr>
+						</table>
+						<!--div style="position:absolute;top:400px;" class="fragment" data-fragment-index="6">
+								<img src="assets/doi-complete.PNG">
+							</div-->
+						<div style="position:absolute; left: 100px; top:670px; font-size:20px">[Furnas 1986][Ham 2009][Abello 2014]</div>
+
+			</section>
+		</section>
+
+
+		<section>
+
+			<section>
+				<h2>Use Case</h2>
+				<i>The user wants to find all derived transformations and results for a recently created analysis.</i>
+				<img src="assets/use-case-1.png">
+				<p>Figure shows the visualization state after step 4</p>
+
+			</section>
+
+			<section>
+				<h2>Conference Contributions</h2>
+				<ul>
+					<div class="fragment fade-out" data-fragment-index="1">
+						<li><b>Concept mockup in Poster</b><br>
+							<div style="font-size:20px"><i>Transparent Layering for Visualizing Dynamic Graphs Using the Flip Book Metaphor.</i> [Stitz et al. 2014] at IEEE
+								VIS Conference (InfoVis '14), Paris, France.</div>
+						</li>
+					</div>
+					<div class="fragment fade-out" data-fragment-index="1">
+						<li><b>Late implementation results in Poster</b><br><i><div style="font-size:20px">Interactive Visualization of Provenance Graphs for Reproducible Biomedical Research.</i>							[Luger et al. 2015] at ISMB Symposium on Biological Data Visualization (BioVis '15), Dublin, Ireland.</div>
+					</li>
+	</div>
+	<li><span class="fragment highlighted" data-fragment-index="1"><b>Final implementation results in Poster</b></span><br><i><div style="font-size:20px">Interactive Visualization of Provenance Graphs for Reproducible Biomedical Research.</i>		[Luger et al. 2015] at IEEE VIS Conference (InfoVis '15), Chicago, IL, USA.</div>
+	</li>
+	<div class="fragment fade-out" data-fragment-index="1">
+		<li><b>User scenario in Full Paper [conditionally accepted for EuroVis '16]</b><br><i><div style="font-size:20px">AVOCADO: Visualization of Workflow-Derived Data Provenance for Reproducible Biomedical Research.</i>			[Stitz et al. 2016]</div>
+	</li>
+	</div>
+	</ul>
+
+	</section>
+
+
+
+	<section>
+		<h2>IEEE Conference on Visualization (InfoVis '15)</h2>
+		<p>Won
+			<emph>Best Poster Award</emph> out of ~90 posters in Chicago, October 2015</p>
+
+		<table>
+			<!--tr>
+									<td colspan="3">
+										<img src="assets/chicago.jpg">
+
+									</td>
+								</tr-->
+			<tr>
+				<td>
+					<img height="400px" src="assets/ieeevis.jpg">
+				</td>
+				<!--td>
+										<img height="300px" src="assets/infovis-poster.png">
+									</td-->
+				<td>
+					<img height="400px" src="assets/best-poster.jpg">
+				</td>
+			</tr>
+		</table>
+
+
+	</section>
+
+	<section data-background-video="assets/infovis15noaudio.webm">
+		<!--h2>InfoVis '15 Demo Video</h2>
+							<video class="stretch" controls muted>
+	    					<source src="assets/infovis15.mp4" type="video/mp4">
+								<source src="assets/infovis15.webm" type="video/webm">
+    						Problems playing the video.
+							</video-->
+
+
+	</section>
+	</section>
+
+	<section>
+		<section>
+			<h2>Conclusion</h2>
+			<p>Analysts are now able to
+				<emph>explore time-evolving provenance graphs to review and ensure reproducibility</emph> of their analytical study results.</p>
+			<ul>
+				<li>Overview through
+					<emph>aggregation</emph> strategies</li>
+				<li>Dynamic
+					<emph>node-link</emph> approach is
+					<emph>intutitive</emph> to accomplish attribute and
+					<emph>topological tasks</emph>
+				</li>
+				<li>
+					<emph>Visual encoding</emph> of attributes, time, and change metrics; Color scheme</li>
+				<li>Extensive
+					<emph>interactive</emph> approach: pan, zoom, drag & drop, select, filter, highlight, collapse, expand</li>
+				<li>
+					<emph>Interest-driven</emph> navigation via a modular DOI function</li>
+				<li>Multiple support views:
+					<emph>Timeline, DOI, Node details, Color scheme</emph>
+				</li>
+			</ul>
+
+		</section>
+
+
+	</section>
+
+	<section>
+		<h2>&lt;thanks/&gt</h2>
+		<table class="acks">
+			<tr>
+				<td>
+					<img src="assets/mstreit.jpg">
+				</td>
+				<td>
+					<img src="assets/ngehlenborg.png">
+				</td>
+				<td>
+					<img src="assets/hstitz.png">
+				</td>
+				<td>
+					<img src="assets/sgratzl.jpg">
+				</td>
+				<!-- <td>
+									<img src="assets/obimber.png">
+								</td> -->
+			</tr>
+			<tr>
+				<td>Marc Streit</td>
+				<td>Nils Gehlenborg</td>
+				<td>Holger Stitz</td>
+				<td>Samuel Gratzl</td>
+				<!-- <td>Oliver Bimber</td> -->
+			</tr>
+		</table>
+		<br>
+		<div align="left">
+			<ul>
+				<li>Comittee</li>
+				<li>Refinery Platform team</li>
+				<li>Institute of Computer Graphics</li>
+				<li>Study colleagues</li>
+				<li>Family and friends</li>
+			</ul>
+		</div>
+
+	</section>
+	<section>
+		<h2>Bibliography</h2>
+		<ol style="font-size:15px">
+			<li>J. Kaiser, “The Cancer Test,” Science, vol. 348, no. 6242, pp. 1411–1413, 2015.</li>
+			<li>Y. L. Simmhan, B. Plale, and D. Gannon, “A Survey of Data Provenance in e-Science,” ACM SIGMOD Record, vol. 34, no. 3,
+				pp. 31–36, 2005.</li>
+			<li>“Refinery Platform.” 2015.</li>
+			<li>L. Omberg, K. Ellrott, Y. Yuan, C. Kandoth, C. Wong, M. R. Kellen, S. H. Friend, J. Stuart, H. Liang, and A. A. Margolin,
+				“Enabling Transparent and Collaborative Computational Analysis of 12 Tumor Types within The Cancer Genome Atlas,” Nat
+				Genet, vol. 45, no. 10, pp. 1121–1126, 2013.</li>
+			<li>M. K. Anand, S. Bowers, and B. Ludaescher, “Provenance Browser: Displaying and Querying Scientific Workflow Provenance
+				Graphs,” in Proceedings of the IEEE Conference on Data Engineering (ICDE ’10), 2010, pp. 1201–1204.</li>
+			<li>S. Davidson, S. Cohen-Boulakia, A. Eyal, B. Ludaescher, T. McPhillips, S. Bowers, and J. Freire, “Provenance in Scientific
+				Workflow Systems,” IEEE Data Engineering Bulletin, vol. 30, no. 4, pp. 44–50, 2007.</li>
+			<li>M. I. Seltzer and P. Macko, “Provenance Map Orbiter: Interactive Exploration of Large Provenance Graphs,” in Proceedings
+				of the USENIX Workshop on the Theory and Practice of Provenance (TaPP ’11), 2011.</li>
+			<li>F. Beck, M. Burch, S. Diehl, and D. Weiskopf, “The State of the Art in Visualizing Dynamic Graphs,” in Proceedings of
+				the Eurographics Conference on Visualization (EuroVis ’14) -- State of The Art Reports, 2014.</li>
+			<li>N. Elmqvist and J.-D. Fekete, “Hierarchical Aggregation for Information Visualization: Overview, Techniques, and Design
+				Guidelines,” IEEE Transactions on Visualization and Computer Graphics, vol. 16, no. 3, pp. 439–454, 2010.</li>
+			<li>R. Milo, S. Shen-Orr, S. Itzkovitz, N. Kashtan, D. Chklovskii, and U. Alon, “Network Motifs: Simple Building Blocks of
+				Complex Networks,” Science, vol. 298, no. 5594, pp. 824–827, 2002.</li>
+			<li>E. Maguire, P. Rocca-Serra, S.-A. Sansone, J. Davies, and M. Chen, “Visual Compression of Workflow Visualizations with
+				Automated Detection of Macro Motifs,” IEEE Transactions on Visualization and Computer Graphics, vol. 19, no. 12, pp.
+				2576–2585, 2013.</li>
+			<li>G. W. Furnas, “Generalized Fisheye Views,” in Proceedings of the SIGCHI Conference on Human Factors in Computing Systems
+				(CHI ’86), 1986, pp. 16–23.</li>
+			<li>F. van Ham and A. Perer, “‘Search, Show Context, Expand on Demand’: Supporting Large Graph Exploration with Degree-of-Interest,”
+				IEEE Transactions on Visualization and Computer Graphics (InfoVis ’09), vol. 15, no. 6, pp. 953–960, 2009.</li>
+			<li>J. Abello, S. Hadlak, H. Schumann, and H.-J. Schulz, “A Modular Degree-of-Interest Specification for the Visual Analysis
+				of Large Dynamic Networks,” IEEE Transactions on Visualization and Computer Graphics (InfoVis ’13), vol. 20, no. 3, pp.
+				337–350, 2014.</li>
+		</ol>
+	</section>
+	<section>
+		<h2>Bibliography cont'd.</h2>
+		<ol style="font-size:15px">
+			<li>S. Luger, H. Stitz, S. Gratzl, M. Streit, and N. Gehlenborg, “Interactive Visualization of Provenance Graphs for Reproducible
+				Biomedical Research,” in Poster Proceedings of the Symposium on Biological Data Visualization (BioVis ’15), 2015.</li>
+			<li>S. Luger, H. Stitz, S. Gratzl, N. Gehlenborg, and M. Streit, “Interactive Visualization of Provenance Graphs for Reproducible
+				Biomedical Research,” in Poster Compendium of the IEEE VIS Conference (InfoVis ’15), 2015.</li>
+			<li>H. Stitz, S. Gratzl, S. Luger, N. Gehlenborg, and M. Streit, “Transparent Layering for Visualizing Dynamic Graphs Using
+				the Flip Book Metaphor,” in Poster Compendium of the IEEE VIS Conference (InfoVis ’14), 2014.</li>
+			<li>M. Streit and O. Bimber, “Visual Analytics: Seeking the Unknown,” Computer, vol. 46, no. 7, pp. 20–21, 2013.</li>
+			<li>T. Munzner, Visualization Analysis and Design. CRC Press, 2014.</li>
+			<li>N. Elmqvist, T.-N. Do, H. Goodell, N. Henry, and J. Fekete, “ZAME: Interactive Large-Scale Graph Visualization,” in Proceedings
+				of the IEEE Pacific Visualization Symposium (PacificVis ’08), 2008, pp. 215–222.</li>
+			<li>M. Ghoniem, J.-D. Fekete, and P. Castagliola, “A Comparison of the Readability of Graphs Using Node-Link and Matrix-Based
+				Representations,” in Proceedings of the IEEE Symposium on Information Visualization (InfoVis ’04), 2004, pp. 17–24.</li>
+			<li>H.-J. Schulz and H. Schumann, “Visualizing Graphs - A Generalized View,” in Proceedings of the IEEE Conference on Information
+				Visualisation (IV ’06), 2006, pp. 166–173.</li>
+			<li>B. Shneiderman, “The Eyes Have It: A Task by Data Type Taxonomy for Information Visualizations,” in Proceedings of the
+				IEEE Symposium on Visual Languages (VL ’96), 1996, pp. 336–343.</li>
+			<li>B. Lee, C. Plaisant, C. S. Parr, J.-D. Fekete, and N. Henry, “Task Taxonomy for Graph Visualization,” in Proceedings of
+				the AVI Workshop on Beyond time and errors: novel evaluation methods for information visualization (BELIV ’06), 2006,
+				pp. 1–5.</li>
+			<li>“dagre - Graph Layout for JavaScript.” 2015.</li>
+			<li>K. Sugiyama, S. Tagawa, and M. Toda, “Methods for Visual Understanding of Hierarchical System Structures,” IEEE Transactions
+				on Systems, Man and Cybernetics, vol. 11, no. 2, pp. 109–125, 1981.</li>
+			<li>E. Maguire, P. Rocca-Serra, S.-A. Sansone, J. Davies, and M. Chen, “Taxonomy-Based Glyph Design with a Case Study on Visualizing
+				Workflows of Biological Experiments,” IEEE Transactions on Visualization and Computer Graphics (InfoVis ’12), vol. 18,
+				no. 12, pp. 2603–2612, 2012.</li>
+			<li>D. Keim, J. Kohlhammer, G. Ellis, and F. Mansmann, Eds., Mastering the Information Age - Solving Problems with Visual
+				Analytics. Eurographics Association, 2010.</li>
+		</ol>
+	</section>
+	<section>
+		<h2>Bibliography cont'd.</h2>
+		<p>Please see thesis bibliography.</p>
+	</section>
+
+
+	<section>
+		<section>
+			<h2>Appendix</h2>
+		</section>
+
+		<section>
+			<h2>Scientific Workflow Systems</h2>
+			<ul>
+				<li>Analysis platforms</li>
+				<li>Manage scientific repositories (genomics, astronomy, ...) and automate heterogeneous, large, and complex experiments</li>
+				<li>Present, share, and visualize results</li>
+				<li>Track data provenance</li>
+			</ul>
+
+		</section>
+
+		<section>
+			<h2>Challenges</h2>
+			<p>Provenance graphs</p>
+			<ul>
+				<li>become
+					<emph>large</emph> very quickly</li>
+				<li>contain
+					<emph>temporal</emph> information</li>
+			</ul>
+
+		</section>
+
+		<section>
+			<h2>Node-Link Diagram Approach</h2>
+			<center>
+				<div style="position:absolute; left: 0px; top:70px;">
+					<div class="fragment fade-out" data-fragment-index="1"><img width="500px" src="assets/matrix.PNG"></div>
+				</div>
+				<div style="position:absolute; left: 500px; top:70px;">
+					<div class="fragment fade-out" data-fragment-index="1"><img width="500px" src="assets/nl.PNG"></div>
+				</div>
+				<div class="fragment" data-fragment-index="1" style="position:absolute; left: 0px; top:150px;"><img width="100%" src="assets/terms.png"></div>
+			</center>
+			<div style="position:absolute; left: 0px; top:500px">
+				<ul>
+					<li>
+						<emph>Matrix</emph> and implicit representations are
+						<emph>not tightly coupled</emph>
+					</li>
+					<li>
+						<emph>Node-link</emph> is ideal for
+						<emph>path-finding tasks</emph>
+					</li>
+					<li class="fragment" data-fragment-index="1">Due to the
+						<emph>hierarchical</emph> nature of the provenance graph, a node-link approach can still be scalable.</li>
+				</ul>
+			</div>
+
+		</section>
+
+		<section>
+			<h2>Node Glyph Design</h2>
+			<div>
+				<span style="float: left"><img height="400px" src="assets/node-glyph.png"></span>
+				<span style="float: right">
+								<ul>
+								<li>Node type: <emph>shape</emph> and icon</li>
+								<li>Date and Time: <emph>brightness</emph></li>
+								<li>Attributes: text <emph>labels</emph></li>
+								<li>Topological information: <emph>numerals</emph></li>
+								<li>Change: asterisk</li>
+								<li>Highlighting: <emph>color</emph> and stroke <emph>width</emph></li>
+							</ul></span>
+				<div style="clear:both;"></div>
+			</div>
+
+		</section>
+
+		<section>
+			<h2>Filter</h2>
+			by attributes, analysis, and time frame.
+			<img height="400px" src="assets/filter-blend-hide.png">
+			<p>Filter options: (a) blend, (b) hide.</p>
+
+		</section>
+
+		<section>
+			<h2>Analysis Timeline</h2>
+			<div>
+				<span style="float: left"><img src="assets/timeline-concept.png"><br>
+							<img height="300px" src="assets/timeline-sa-graph.png"></span>
+				<span style="float: right">
+								<img width="600px" src="assets/timeline.png">
+								<p>Graph shows blend and hide for filter option (c).</p>
+							</span>
+				<div style="clear:both;"></div>
+			</div>
+
+		</section>
+
+		<section>
+			<h2>Dynamic Layout</h2>
+			<p>The
+				<emph>layout changes at the analysis/layer level</emph> due to filtering and navigation among hierarchy levels.</p>
+			<ul>
+				<li>Layered graph drawing (Sugiyama style) approach</li>
+				<li>Column-based layout for motif discovery</li>
+				<li>Deterministic workflow layout</li>
+				<li>Barycenter heuristic subanalysis reordering</li>
+				<li>Animations and transitions</li>
+				<li>Dagre graph layout library: <a href="https://github.com/cpettitt/dagre">github.com/cpettitt/dagre</a></li>
+			</ul>
+
+		</section>
+
+		<section>
+			<h2>Showcase</h2>
+			<img src="assets/showcase.png">
+
+		</section>
+
+		<section>
+			<h2>Use Case 2</h2>
+			<p>The user wants to investigate the files and transformations leading to a correctly reproduced result.</p>
+			<img src="assets/use-case-3.png">
+
+		</section>
+
+		<section>
+			<h2>Full Paper Teaser</h2>
+			<center>
+				<img src="assets/avocado.png">
+			</center>
+
+		</section>
+
+		<section>
+			<h2>Class Diagram</h2>
+			<center>
+				<img width="80%" src="assets/class-diagram.PNG">
+			</center>
+
+		</section>
+
+		<section>
+			<h2>Motif Discovery & Layering</h2>
+			<center>
+				<img width="50%" src="assets/motifs-layering.PNG">
+			</center>
+
+		</section>
+
+		<section>
+			<h2>Other Interaction Techniques</h2>
+			<ul>
+				<li>Filter</li>
+				<li>Pan and zoom</li>
+				<li>Fit to screen</li>
+				<li>Drag and drop</li>
+				<li>Node selection; also reveals details in info tab</li>
+				<li>Node mouseover; shows tooltips for quick info</li>
+				<li>Color coding by node type, workflow template, or time</li>
+			</ul>
+
+		</section>
+
+		<section>
+			<h2>Discussion</h2>
+			<ul>
+				<li>Time Encoding and Exploration</li>
+				<li>Graph Layout</li>
+				<li>Navigation among Hierarchy Levels</li>
+				<li>Node Glyph Design</li>
+				<li>Technical Considerations</li>
+			</ul>
+
+		</section>
+
+		<section>
+			<h2>InfoVis '14</h2>
+			<center>
+				<img width="100%" src="assets/provvis-mockup.png">
+			</center>
+
+		</section>
+
+		<section>
+			<h2>BioVis '15</h2>
+			<center>
+				<img width="100%" src="assets/biovis15.PNG">
+			</center>
+
+		</section>
+
+		<section>
+			<h2>Future Work</h2>
+			<ul>
+				<li>Provenance of Findings: Annotations and Visualization States</li>
+				<li>Actionable Provenance</li>
+				<li>Extend DOI function</li>
+				<li>Enhance Motif-based Layering</li>
+			</ul>
+
+		</section>
+	</section>
+
+	<section>
+		<h2>&lt;thanks\&gt</h2>
+	</section>
+	</div>
+
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+	</script>
+
+</body>
+
+</html>
